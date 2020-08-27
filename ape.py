@@ -40,12 +40,7 @@ for pdf in pdfs:
     date = datetime.strptime(txt[0].split(' ')[-1], '%m/%d/%Y')
     titles = ['Ticker', 'CUSIP', 'Shares', 'Market Value', 'Weight']
     txt = txt[2:]
-    dataset = []
-    for row in txt:
-        row = row.split("   ")[1]
-        buf = row.split(" ")
-        row = buf[-5:]
-        dataset.append(row)
+    dataset = [row.split("   ")[1].split(" ")[-5:] for row in txt]
     df = pd.DataFrame(data=dataset, columns=titles)
     df['Shares'] = df['Shares'].str.replace(',', '').astype(int)
     df['Market Value'] = df['Market Value'].str.replace(
