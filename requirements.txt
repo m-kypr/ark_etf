@@ -1,0 +1,4 @@
+tika
+requests
+pandas
+mplfinance
