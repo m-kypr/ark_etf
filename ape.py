@@ -46,6 +46,7 @@ for pdf in pdfs:
     df['Market Value'] = df['Market Value'].str.replace(
         ',', '').astype(float)
     df['Weight'] = df['Weight'].astype(float)
+    df['S2MV'] = df['Shares']/df['Market Value']
     if dl_stock_csv:
         for sym in list(df['Ticker'].to_dict().values()):
             if sym not in symbols:
