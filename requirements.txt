@@ -1,4 +1,2 @@
-tika
 requests
 pandas
-mplfinance
