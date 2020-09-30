@@ -6,6 +6,8 @@ It also relates the changes to the marketcap of the stock -> diff2marketcap
 
 Output in csv format in the out/ directory
 
+### Loicence m8
+
 copyright is with m-kypr 
 
 You can use, redistribute, do whatever with the code.
