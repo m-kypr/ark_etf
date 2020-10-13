@@ -1,1 +1,4 @@
-echo "* */6 * * * cd ${PWD} && source env/bin/activate && pip install -r requirements.txt && python ape.py > /dev/null 2>&1" > /etc/cron.d/ark_etf
+name="arketf"
+echo "cd ${PWD} && ./start.sh" > /etc/cron.daily/$name
+echo "@reboot ${USER} cd ${PWD}/out && screen -S ark_etf_out -dm python3 -m http.server 3334 >/dev/null 2>&1" > /etc/cron.d/rebootfs_$name
+
