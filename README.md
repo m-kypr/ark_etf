@@ -2,5 +2,21 @@
 
 ### TODO
 
-* Remove old changes 
-* Pretty?
+* 
+* Build rest API
+
+### DONE
+
+* Downloading and pickling 
+* Rebuild the shitty code I wrote before
+
+
+
+### The API 
+
+
+Url: {host}/api
+
+Endpoints:
+
+

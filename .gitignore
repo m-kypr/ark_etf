@@ -3,3 +3,5 @@ env
 csv
 pickle
 out
+*.swp
+__pycache__
