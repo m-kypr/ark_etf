@@ -1,0 +1,27 @@
+[
+  {
+    "name": "ARK",
+    "modules": [
+      {
+        "name": "ARK_INNOVATION_ETF_ARKK_HOLDINGS",
+        "link": "https://ark-funds.com/wp-content/fundsiteliterature/csv/ARK_INNOVATION_ETF_ARKK_HOLDINGS.csv"
+      },
+      {
+        "name": "ARK_AUTONOMOUS_TECHNOLOGY_&_ROBOTICS_ETF_ARKQ_HOLDINGS",
+        "link": "https://ark-funds.com/wp-content/fundsiteliterature/csv/ARK_AUTONOMOUS_TECHNOLOGY_&_ROBOTICS_ETF_ARKQ_HOLDINGS.csv"
+      },
+      {
+        "name": "ARK_NEXT_GENERATION_INTERNET_ETF_ARKW_HOLDINGS",
+        "link": "https://ark-funds.com/wp-content/fundsiteliterature/csv/ARK_NEXT_GENERATION_INTERNET_ETF_ARKW_HOLDINGS.csv"
+      },
+      {
+        "name": "ARK_GENOMIC_REVOLUTION_MULTISECTOR_ETF_ARKG_HOLDINGS",
+        "link": "https://ark-funds.com/wp-content/fundsiteliterature/csv/ARK_GENOMIC_REVOLUTION_MULTISECTOR_ETF_ARKG_HOLDINGS.csv"
+      },
+      {
+        "name": "ARK_FINTECH_INNOVATION_ETF_ARKF_HOLDINGS",
+        "link": "https://ark-funds.com/wp-content/fundsiteliterature/csv/ARK_FINTECH_INNOVATION_ETF_ARKF_HOLDINGS.csv"
+      }
+    ]
+  }
+]
