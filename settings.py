@@ -3,6 +3,7 @@ from util import makedir
 DOWNLOAD = True
 DEBUG = True
 FORCE_REPOPULATE = False
+FORCE_REPICKLE = True
 
 ETFS_FILE = "etfs.json"
 DATETIME_FORMAT = '%m%d%y'
