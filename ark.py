@@ -67,7 +67,6 @@ def calc_changes(etf):
     shares_df_diff = shares_df.diff().dropna(how='all')
   except FileNotFoundError as e:
     return
-  print(shares_df)
   # Remove zeros
   #shares_df_diff = shares_df_diff.loc[~(shares_df_diff==0).all(axis=1)]
   shares_df_diff = shares_df_diff[(shares_df_diff.T != 0).all()]
