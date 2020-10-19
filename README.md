@@ -2,14 +2,14 @@
 
 ### TODO
 
-* 
-* Build rest API
+* Frontend pretty 
+
 
 ### DONE
 
 * Downloading and pickling 
 * Rebuild the shitty code I wrote before
-
+* Build rest API
 
 
 ### The API 

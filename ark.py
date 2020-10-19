@@ -15,7 +15,7 @@ def update_etf_with_new_data(etf, date_dir):
     if etf.link.split('/')[-1] in new_csv:
       df = ETFDataframe(pd.read_csv(os.path.join(date_dir_path, new_csv)))
       df.prepare(etf, date_dir)
-      etf.merge_df(df)
+      # etf.merge_df(df)
       break
 
 
@@ -88,16 +88,20 @@ def calc_changes(etf):
       for date, diff in shares_df_diff[ticker].iteritems():
         if diff == 0:
           continue
+
+        tmp_df = pd.DataFrame(data={
+            'date': date,
+            'ticker': [ticker],
+            'diff': diff,
+            'd2mc': diff/marketcap_df[ticker][date]
+        })
+        tmp_df.set_index('date', inplace=True)
         changes_df = pd.concat([
             changes_df,
-            pd.DataFrame(data={
-                'date': date,
-                'ticker': [ticker],
-                'diff': diff,
-                'd2mc': diff/marketcap_df[ticker][date]
-            })
+            tmp_df
         ])
     changes_df.to_pickle(changes_path)
+    print(changes_df)
 
 
 def calc_all():

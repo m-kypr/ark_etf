@@ -7,7 +7,6 @@ class ETF():
   def __init__(self, name, link, *args, **kwargs):
     self.name = name
     self.link = link
-    self._df = pd.DataFrame()
 
   def to_dict(self):
     return self.__dict__
@@ -19,14 +18,17 @@ class ETF():
   def from_dict(dict):
     return ETF(dict['name'], dict['link'])
 
-  def merge_df(self, df):
-    pd.concat([self._df, df])
-
   def __eq__(self, other):
     return self.name == other.name
 
 
 class ETFDataframe(pd.DataFrame):
+
+  def serialize(self):
+    cc = pd.DataFrame(self.copy())
+    cc['timestamp'] = pd.to_datetime(cc.index).astype(int)/(10**9)
+    return cc.to_dict('records')
+
   def extract_column(self, column, etf, date, name=None):
     if not name:
       name = column
