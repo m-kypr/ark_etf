@@ -67,6 +67,7 @@ def calc_changes(etf):
     shares_df_diff = shares_df.diff().dropna(how='all')
   except FileNotFoundError as e:
     return
+  # print(shares_df)
   # Remove zeros
   #shares_df_diff = shares_df_diff.loc[~(shares_df_diff==0).all(axis=1)]
   shares_df_diff = shares_df_diff[(shares_df_diff.T != 0).all()]
@@ -77,7 +78,7 @@ def calc_changes(etf):
   # marketcap_df_diff = marketcap_df.diff().dropna()
   # Remove zeros
   # marketcap_df_diff = marketcap_df_diff[(marketcap_df_diff.T != 0).any()]
-  print(shares_df_diff)
+  # print(shares_df_diff)
   if not shares_df_diff.empty:
     changes_path = os.path.join(
         settings.PICKLE_DIR, etf.name + '-changes.pickle')
@@ -101,10 +102,10 @@ def calc_changes(etf):
               tmp_df
           ])
         except Exception as e:
-          print(data)
+          print(data, flush=True)
           raise Exception()
     changes_df.to_pickle(changes_path)
-    print(changes_df)
+    # print(changes_df)
 
 
 def calc_all():
