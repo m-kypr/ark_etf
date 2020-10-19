@@ -1,5 +1,5 @@
-file="ape.py"
+file="ark.py"
 source env/bin/activate
 pip install -r requirements.txt
-screen -S ${PWD##*/} -dm python $file
-#python $file
+#screen -S ${PWD##*/} -dm python $file
+python $file

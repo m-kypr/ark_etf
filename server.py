@@ -47,10 +47,13 @@ def etf_changes(id):
       t = time.time() - LATEST_QUERIES[request.remote_addr]
       if t < 60 * 60 * 24:
         return f"Come back in {datetime.datetime(1,1,1) + datetime.timedelta(seconds=t)}s"
+    print("here")
     changes_df = pd.read_pickle(os.path.join(
         settings.PICKLE_DIR, settings.get_etfs()[id].name + "-changes.pickle"))
+    print(changes_df)
     changes_df = etf.ETFDataframe(changes_df)
     LATEST_QUERIES[request.remote_addr] = int(time.time())
+    print(changes_df.serialize())
     return jsonify(changes_df.serialize())
   except FileNotFoundError as e:
     return jsonify({'error': 'not available'})
@@ -76,6 +79,6 @@ if __name__ == '__main__':
   read_etfs()
   from threading import Thread
   t = Thread(target=update)
-  # t.start()
+  t.start()
   app.run(host='0.0.0.0', port=3334, debug=settings.DEBUG)
-  # t.join()
+  t.join()
