@@ -30,7 +30,7 @@ def get_latest(etf):
 
 def set_latest(etf):
   open(os.path.join(settings.PICKLE_DIR,
-                    etf.name + "-" + os.listdir(settings.CSV_DIR)[-1]), 'a')
+                    etf.name + "-" + sorted(os.listdir(settings.CSV_DIR))[-1]), 'a')
 
 
 def download_all():
@@ -64,11 +64,13 @@ def calc_changes(etf):
   try:
     shares_df = pd.read_pickle(os.path.join(
         settings.PICKLE_DIR, etf.name+'-shares.pickle'))
-    shares_df_diff = shares_df.diff().dropna()
+    shares_df_diff = shares_df.diff().dropna(how='all')
   except FileNotFoundError as e:
     return
+  print(shares_df)
   # Remove zeros
-  shares_df_diff = shares_df_diff[(shares_df_diff.T != 0).any()]
+  #shares_df_diff = shares_df_diff.loc[~(shares_df_diff==0).all(axis=1)]
+  shares_df_diff = shares_df_diff[(shares_df_diff.T != 0).all()]
 
   # Marketcap
   marketcap_df = pd.read_pickle(os.path.join(
@@ -76,7 +78,7 @@ def calc_changes(etf):
   # marketcap_df_diff = marketcap_df.diff().dropna()
   # Remove zeros
   # marketcap_df_diff = marketcap_df_diff[(marketcap_df_diff.T != 0).any()]
-
+  print(shares_df_diff)
   if not shares_df_diff.empty:
     changes_path = os.path.join(
         settings.PICKLE_DIR, etf.name + '-changes.pickle')
@@ -130,7 +132,7 @@ if __name__ == "__main__":
   if settings.DOWNLOAD:
     download_all()
   calc_all()
-  populate_out()
+  #populate_out()
   for etf in settings.get_etfs():
     set_latest(etf)
   print(time.time()-start)
