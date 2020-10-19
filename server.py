@@ -2,6 +2,7 @@ import os
 import pandas as pd
 import settings
 import etf
+import time
 import json
 from ark import *
 from flask import Flask, render_template, Response, request, jsonify
@@ -39,7 +40,7 @@ def etf_changes(id):
   if date := request.args.get('date'):
     # Old data
     return "not implemented"
-  # latest data can only be queried once because it reduces work on frontend
+  # latest data can only be queried once by each ip because it reduces work on frontend
   try:
     print(LATEST_QUERIES)
     if request.remote_addr in LATEST_QUERIES.keys():
@@ -51,6 +52,7 @@ def etf_changes(id):
         settings.PICKLE_DIR, settings.get_etfs()[id].name + "-changes.pickle"))
     changes_df = etf.ETFDataframe(changes_df)
     LATEST_QUERIES[request.remote_addr] = int(time.time())
+    print(changes_df.serialize())
     return jsonify(changes_df.serialize())
   except FileNotFoundError as e:
     return jsonify({'error': 'not available'})
