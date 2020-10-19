@@ -88,20 +88,22 @@ def calc_changes(etf):
       changes_df = pd.DataFrame()
     for ticker in shares_df_diff:
       for date, diff in shares_df_diff[ticker].iteritems():
-        if diff == 0:
-          continue
-
-        tmp_df = pd.DataFrame(data={
+        data = {
             'date': date,
             'ticker': [ticker],
             'diff': diff,
             'd2mc': diff/marketcap_df[ticker][date]
-        })
-        tmp_df.set_index('date', inplace=True)
-        changes_df = pd.concat([
-            changes_df,
-            tmp_df
-        ])
+        }
+        try:
+          tmp_df = pd.DataFrame(data=data)
+          tmp_df.set_index('date', inplace=True)
+          changes_df = pd.concat([
+              changes_df,
+              tmp_df
+          ])
+        except Exception as e:
+          print(data)
+          raise Exception()
     changes_df.to_pickle(changes_path)
     print(changes_df)
 
@@ -132,7 +134,7 @@ if __name__ == "__main__":
   if settings.DOWNLOAD:
     download_all()
   calc_all()
-  #populate_out()
+  # populate_out()
   for etf in settings.get_etfs():
     set_latest(etf)
   print(time.time()-start)
